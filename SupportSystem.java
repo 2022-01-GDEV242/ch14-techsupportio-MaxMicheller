@@ -27,7 +27,7 @@ public class SupportSystem
         reader = new InputReader();
         responder = new Responder();
     }
-
+ 
     /**
      * Start the technical support system. This will print a welcome message and enter
      * into a dialog with the user, until the user ends the dialog.

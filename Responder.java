@@ -113,6 +113,16 @@ public class Responder
                         "Ahhh, BlueJ, yes. We tried to buy out those guys long ago, but\n" +
                         "they simply won't sell... Stubborn people they are. Nothing we can\n" +
                         "do about it, I'm afraid.");
+                        
+        //String[] keys = response.split(",");
+        //get key string
+        //get combined response string
+        //convert key into array
+        //make responsemap put per key with added combined response
+        
+        //ends key/response combo with a space
+        
+        //repeat till null
     }
 
     /**
@@ -122,13 +132,40 @@ public class Responder
     private void fillDefaultResponses()
     {
         Charset charset = Charset.forName("US-ASCII");
-        Path path = Paths.get(FILE_OF_DEFAULT_RESPONSES);
+        Path path = Paths.get(FILE_OF_DEFAULT_RESPONSES); 
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
             String response = reader.readLine();
-            while(response != null) {
-                defaultResponses.add(response);
+            String combine = response;
+            String response2 = "";
+            while(response != null && response2 != null) {
+                response2 = reader.readLine();
+                 
+                if(response2 != null){
+                    if(response2.trim().length() != 0){
+                        combine += response2;
+                    }
+                    else{
+                        if(combine != ""){
+                            defaultResponses.add(combine);
+                            combine = "";
+                        }
+                    }
+                }
+                
                 response = reader.readLine();
+                if(response != null){
+                    if(response.trim().length() != 0){
+                        combine += response;
+                    }
+                    else{
+                        if(combine != ""){
+                            defaultResponses.add(combine);
+                            combine = "";
+                        }
+                    }
+                }
             }
+            defaultResponses.add(combine);
         }
         catch(FileNotFoundException e) {
             System.err.println("Unable to open " + FILE_OF_DEFAULT_RESPONSES);
